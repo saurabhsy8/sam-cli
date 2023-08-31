@@ -13,7 +13,6 @@ tasks:
                  
           elif [[ $CI_REPO_BRANCH == "dev" ]]; then
                  ENV_NAME=dev-new                           
-          
           else
               echo "Unsupported release branch: $CI_REPO_BRANCH "
               exit 1

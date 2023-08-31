@@ -26,7 +26,7 @@ tasks:
         rm sam-cli.zip
         
         # sam build 
-        sam list resources $ENV_NAME        
+        sam list resources --stack-name $ENV_NAME        
         # sam deploy --stack-name $ENV_NAME 
        
 trigger:

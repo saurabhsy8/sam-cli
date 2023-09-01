@@ -25,7 +25,7 @@ tasks:
         sam --version
         
         sam build 
-        sam list resources --config-env $STACK_NAME        
+        sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 
        
 trigger:

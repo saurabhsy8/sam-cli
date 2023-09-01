@@ -26,17 +26,16 @@ tasks:
         unzip -q sam-cli.zip -d sam-installation
         ./sam-installation/install
         
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        curl -q "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         unzip awscliv2.zip
         ./aws/install
         
         aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile $AWS_PROFILE
         aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile $AWS_PROFILE
         aws configure set region $AWS_DEFAULT_REGION --profile $AWS_PROFILE
-
-        cat ~/.aws/config
         cat ~/.aws/credentials
-
+        cat ~/.aws/config
+      - |
         sam build 
         sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 

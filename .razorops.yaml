@@ -34,6 +34,9 @@ tasks:
         aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile $AWS_PROFILE
         aws configure set region $AWS_DEFAULT_REGION --profile $AWS_PROFILE
 
+        cat ~/.aws/config
+        cat ~/.aws/credentials
+
         sam build 
         sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 

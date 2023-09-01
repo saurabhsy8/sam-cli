@@ -3,7 +3,7 @@ version: v2
 tasks:    
   deploy:
     variables:
-    - STACK_NAME=dev-new
+    - STACK_NAME=dev
     steps:
     - checkout
     - commands:
@@ -12,8 +12,7 @@ tasks:
                   STACK_NAME=prod
                  
           elif [[ $CI_REPO_BRANCH == "dev" ]]; then
-                 STACK_NAME=dev                        
-          
+                 STACK_NAME=dev                          
           else
               echo "Unsupported release branch: $CI_REPO_BRANCH "
               exit 1
@@ -22,10 +21,11 @@ tasks:
         sudo apt -qq update
         wget -q https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip -O sam-cli.zip
         unzip -q sam-cli.zip -d sam-installation
-        rm sam-cli.zip
+        sudo ./sam-installation/install
+        sam --version
         
         sam build 
-        sam list resources --config-env $STACK_NAME       
+        sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 
        
 trigger:

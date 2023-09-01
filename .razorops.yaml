@@ -27,7 +27,7 @@ tasks:
         ./sam-installation/install
         
         curl -q "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
+        unzip -q awscliv2.zip
         ./aws/install
         
         aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile $AWS_PROFILE

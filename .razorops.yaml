@@ -9,10 +9,10 @@ tasks:
     - commands:
       - |
         if [[ $CI_REPO_BRANCH == "prod" ]]; then
-                  STACK_NAME=prod-cps-stack
+                  STACK_NAME=prod
                  
           elif [[ $CI_REPO_BRANCH == "dev" ]]; then
-                 STACK_NAME=dev-new                           
+                 STACK_NAME=dev                        
           
           else
               echo "Unsupported release branch: $CI_REPO_BRANCH "
@@ -25,8 +25,8 @@ tasks:
         rm sam-cli.zip
         
         sam build 
-        sam list resources --stack-name $STACK_NAME       
-        sam deploy --stack-name $STACK_NAME 
+        sam list resources --config-env $STACK_NAME       
+        sam deploy --config-env $STACK_NAME 
        
 trigger:
   when: branch in ("dev", "prod")

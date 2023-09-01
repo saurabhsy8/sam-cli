@@ -27,8 +27,9 @@ tasks:
         unzip -q sam-cli.zip -d sam-installation
         ./sam-installation/install
         sam --version
-        echo $AWS_ACCESS_KEY_ID
-        echo $AWS_SECRET_ACCESS_KEY
+        python --version
+        python3 --version
+        echo $PATH
         sam build 
         sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 

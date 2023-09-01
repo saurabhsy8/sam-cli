@@ -2,8 +2,7 @@ version: v2
 
 global:
   runner: python:3.9
-
-
+  
 tasks:    
   deploy:
     variables:
@@ -27,9 +26,7 @@ tasks:
         unzip -q sam-cli.zip -d sam-installation
         ./sam-installation/install
         sam --version
-        python --version
-        python3 --version
-        echo $PATH
+
         sam build 
         sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 

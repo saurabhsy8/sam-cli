@@ -26,7 +26,12 @@ tasks:
         unzip -q sam-cli.zip -d sam-installation
         ./sam-installation/install
         sam --version
-
+  
+        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID \
+          aws_secret_access_key $AWS_SECRET_ACCESS_KEY \
+          default.region $AWS_DEFAULT_REGION --profile $AWS_PROFILE
+          
+        cat ~/.aws/config
         sam build 
         sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 

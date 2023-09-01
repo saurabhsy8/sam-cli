@@ -3,16 +3,16 @@ version: v2
 tasks:    
   deploy:
     variables:
-    - ENV_NAME=dev-new
+    - STACK_NAME=dev
     steps:
     - checkout
     - commands:
       - |
         if [[ $CI_REPO_BRANCH == "prod" ]]; then
-                  ENV_NAME=prod-cps-stack
+                  STACK_NAME=prod
                  
           elif [[ $CI_REPO_BRANCH == "dev" ]]; then
-                 ENV_NAME=dev-new                           
+                 STACK_NAME=dev                          
           else
               echo "Unsupported release branch: $CI_REPO_BRANCH "
               exit 1
@@ -23,11 +23,10 @@ tasks:
         unzip -q sam-cli.zip -d sam-installation
         sudo ./sam-installation/install
         sam --version
-        rm sam-cli.zip
         
-        # sam build 
-        sam list resources --stack-name $ENV_NAME        
-        # sam deploy --stack-name $ENV_NAME 
+        sam build 
+        sam list resources --config-env $STACK_NAME        
+        sam deploy --config-env $STACK_NAME 
        
 trigger:
   when: branch in ("dev", "prod")

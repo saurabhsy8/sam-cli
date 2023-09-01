@@ -1,5 +1,8 @@
 version: v2
 
+global:
+  runner: python:3.9
+
 tasks:    
   deploy:
     variables:
@@ -18,12 +21,13 @@ tasks:
               exit 1
         fi
       - |
-        sudo apt -qq update
+        apt -qq update
         wget -q https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip -O sam-cli.zip
         unzip -q sam-cli.zip -d sam-installation
-        sudo ./sam-installation/install
+        ./sam-installation/install
         sam --version
-        
+        echo $AWS_ACCESS_KEY_ID
+        echo $AWS_SECRET_ACCESS_KEY
         sam build 
         sam list resources --config-env $STACK_NAME           
         sam deploy --config-env $STACK_NAME 
